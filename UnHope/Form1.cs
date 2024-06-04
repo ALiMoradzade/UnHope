@@ -42,7 +42,8 @@ namespace UnHope
         {
             for (int i = 0; i <= f1_1.checkedListBox1.Items.Count - 1; i++)
             {
-                f1_1.checkedListBox1.SetItemCheckState(i, CheckState.Checked);
+                if (i == 3 || i == 5) continue;
+                f1_1.checkedListBox1.SetItemChecked(i, true);
             }
 
             
@@ -81,8 +82,10 @@ namespace UnHope
         }
 
         #region Data
-        Random R = new Random();
-
+        public readonly string[,] passwordCharList = { { "abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZ" },
+                                                       { "0123456789", "۰۱۲۳۴۵۶۷۸۹٠١٢٣٤٥٦٧٨٩" },
+                                                       { "!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~", "¡£¤¥°¿÷٪•₩€■□▪◇○●☆♡♤♧《》" }
+                                                     };
         int encryptionBase = 10, m;
         #endregion
 
@@ -401,39 +404,48 @@ namespace UnHope
         {
             Form1_6 f1_6 = new Form1_6();
             f1_6.ShowDialog();
-            string[] s = textBox1.Text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-            var lines = s.Select(x => x + f1_6.textBox1.Text);
-            textBox1.Text = string.Join("\r\n", lines);
-
+            textBox1.Lines = textBox1.Lines.Select(x => x + f1_6.textBox1.Text).ToArray();
             textBox1.SelectionStart = textBox1.TextLength;
+            textBox1.ScrollToCaret();
         }
 
+        #region Sort
         private void ascendingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string[] s = textBox1.Text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-            var lines = s.OrderBy(x => x);
-            textBox1.Text = string.Join("\r\n", lines);
-
+            if (textBox1.SelectionLength > 0) textBox1.SelectedText = string.Concat(textBox1.SelectedText.OrderBy(x => x));
+            else textBox1.Lines = textBox1.Lines.OrderBy(x => x).ToArray();
             textBox1.SelectionStart = textBox1.TextLength;
+            textBox1.ScrollToCaret();
         }
 
         private void descendingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string[] s = textBox1.Text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-            var lines = s.OrderByDescending(x => x);
-            textBox1.Text = string.Join("\r\n", lines);
-
+            if (textBox1.SelectionLength > 0) textBox1.SelectedText = string.Concat(textBox1.SelectedText.OrderByDescending(x => x));
+            else textBox1.Lines = textBox1.Lines.OrderByDescending(x => x).ToArray();
             textBox1.SelectionStart = textBox1.TextLength;
+            textBox1.ScrollToCaret();
         }
+        #endregion
 
-        private void reverseLinesOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        #region Reverse
+        private void reverseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string[] s = textBox1.Text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-            var lines = s.Reverse();
-            textBox1.Text = string.Join("\r\n", lines);
-
+            if (textBox1.SelectionLength > 0) textBox1.SelectedText = string.Concat(textBox1.SelectedText.Reverse());
+            else textBox1.Lines = textBox1.Lines.Reverse().ToArray();
             textBox1.SelectionStart = textBox1.TextLength;
+            textBox1.ScrollToCaret();
         }
+        #endregion
+
+        #region Distinct
+        private void distinctToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (textBox1.SelectionLength > 0) textBox1.SelectedText = string.Concat(textBox1.SelectedText.Distinct());
+            else textBox1.Lines = textBox1.Lines.Distinct().ToArray();
+            textBox1.SelectionStart = textBox1.TextLength;
+            textBox1.ScrollToCaret();
+        }
+        #endregion
 
         #region ClipboardWatchDog
         private void ClipboardWatchDog_Click(object sender, EventArgs e)
@@ -471,7 +483,7 @@ namespace UnHope
         private void button0_Click(object sender, EventArgs e)
         {
             textBox1.Clear();
-            comboBox1.SelectedItem = null;
+            comboBox1.SelectedIndex = 0;
             comboBox2.SelectedItem = null;
             checkBox1.Checked = false;
 
@@ -483,7 +495,7 @@ namespace UnHope
                 f1_1.checkedListBox1.SetItemCheckState(i, CheckState.Checked);
             }
             f1_1.checkBox1.Checked = true;
-            f1_1.checkBox2.Checked = false;
+            f1_1.distinctCheckBox.Checked = false;
 
             f2.x_Date_Type.SelectedItem = null;
             f2.Year.Text = "";
@@ -505,25 +517,13 @@ namespace UnHope
         #region Automatic
         private void button1_1_Click(object sender, EventArgs e)
         {
-            int[,] a = new int[4, 2] { { 32, 41 }, { 42, 67 }, { 42, 67 }, { 0, 31 } };
-
             if (checkBox1.Checked) textBox1.Clear();
             if (comboBox1.Text == "") comboBox1.Text = "8";
-           
-            if (f1_1.checkBox2.Checked)
-            {
-                for (int i = 0; i <= f1_1.checkedListBox1.Items.Count - 1; i++)
-                {
-                    if (f1_1.checkedListBox1.GetItemChecked(i))
-                    {
-                        encryptionBase += a[i, 1] - a[i, 0] + 1;
-                    }
-                }
-            }
 
-            if (int.Parse(comboBox1.Text) > encryptionBase && encryptionBase != 0)
+            int passwordCount = int.Parse(comboBox1.Text);
+
+            if (f1_1.distinctCheckBox.Checked && passwordCount > 140)
             {
-                encryptionBase = 0;
                 MessageBox.Show("Sorry, the chosen length is more than we expected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (f1_1.checkedListBox1.CheckedItems.Count == 0)
@@ -533,24 +533,35 @@ namespace UnHope
             }
             else
             {
-                string s = "";
-                while (s.Length < Convert.ToInt32(comboBox1.Text))
-                {
-                Again:
-                    encryptionBase = R.Next(f1_1.checkedListBox1.Items.Count);
-                    if (f1_1.checkedListBox1.GetItemChecked(encryptionBase))
-                    {
-                        m = R.Next(a[encryptionBase, 0], a[encryptionBase, 1] + 1);
-                        if (encryptionBase != 2) s += Data.autoPassword[m];
-                        else if (encryptionBase == 2) s += char.ToUpper(Data.autoPassword[m]);
-                    }
-                    else goto Again;
+                Random random = new Random();
+                string password = "";
+                int generatedNum, previousNum = -1;
 
-                    if (f1_1.checkBox2.Checked) s = new string(s.ToCharArray().Distinct().ToArray());
+                while (password.Length < passwordCount)
+                {
+                    generatedNum = random.Next(f1_1.checkedListBox1.Items.Count);
+                    if (f1_1.checkedListBox1.GetItemChecked(generatedNum) && (previousNum != generatedNum / 2 || f1_1.checkedListBox1.CheckedIndices.Cast<int>().GroupBy(x => x / 2).Count() < 2)) 
+                    {
+                        int catagoryNumber = generatedNum / 2;
+
+                        string samplePass = passwordCharList[catagoryNumber, generatedNum % 2];
+                        char passsCharGen = samplePass[random.Next(samplePass.Length)];
+                        
+                        if (!(f1_1.distinctCheckBox.Checked && password.Contains(passsCharGen)))
+                        {
+                            password += passsCharGen;
+                            previousNum = catagoryNumber;
+                        }
+                    }
                 }
                 encryptionBase = 0;
-                textBox1.Text += s ;
-                if (!checkBox1.Checked) textBox1.Text += "\r\n";
+
+                if (!(string.IsNullOrEmpty(textBox1.Text) || string.IsNullOrEmpty(textBox1.Lines.Last())))
+                {
+                    textBox1.Text += "\r\n";
+                }
+
+                textBox1.Text += password;
             }
         }
         #endregion
@@ -560,36 +571,14 @@ namespace UnHope
         {
             if (checkBox1.Checked) textBox1.Clear();
 
-            int X = 0, Z = 0, V = 0;
-
             if (f1_2.textBox1.Text == "" && f1_2.textBox2.Text == "" ) f1_2.ShowDialog();
             if (comboBox1.Text == "") comboBox1.Text = Convert.ToString(Math.Ceiling((f1_2.textBox1.TextLength + f1_2.textBox2.TextLength) / 3.0));
             if (f1_2.textBox1.Text != "" || f1_2.textBox2.Text != "")
             {
+
                 for (int i = 1; i <= Convert.ToInt32(comboBox1.Text); i++)
                 {
-                    encryptionBase = R.Next(1, 5);
-                    if (encryptionBase == 1)
-                    {
-                        if (X <= f1_2.textBox1.TextLength - 1)
-                        {
-                            textBox1.Text += f1_2.textBox1.Text[X];
-                            X += 1;
-                        }
-                    }
-                    else if (encryptionBase == 2)
-                    {
-                        if (Z <= f1_2.textBox2.TextLength - 1)
-                        {
-                            textBox1.Text += f1_2.textBox2.Text[Z];
-                            Z += 1;
-                        }
-                    }
-                    else if (encryptionBase == 4)
-                    {
-                        encryptionBase = R.Next(Data.autoPassword.Length);
-                        textBox1.Text += Data.autoPassword[encryptionBase];
-                    }
+                    
                 }
                 if (!checkBox1.Checked) textBox1.Text += "\r\n";
             }
@@ -607,9 +596,10 @@ namespace UnHope
         #region English Name
         private void button1_3_Click(object sender, EventArgs e)
         {
+            Random random = new Random();
             if (checkBox1.Checked) textBox1.Clear();
-            encryptionBase = R.Next(Data.engFirstName.Length);
-            m = R.Next(Data.engLastName.Length);
+            encryptionBase = random.Next(Data.engFirstName.Length);
+            m = random.Next(Data.engLastName.Length);
             textBox1.Text += Convert.ToString(Data.engFirstName[encryptionBase]) + " " + Convert.ToString(Data.engLastName[m]);
             if (!checkBox1.Checked) textBox1.Text += "\r\n";
         }
@@ -629,15 +619,16 @@ namespace UnHope
 
             if (comboBox2.Text == "") comboBox2.Text = "Boy's Name";
 
+            Random random = new Random();
             switch (comboBox2.Text)
             {
                 case "Boy's Name":
-                    encryptionBase = R.Next(Data.boyPerName.Length);
+                    encryptionBase = random.Next(Data.boyPerName.Length);
                     textBox1.Text += Convert.ToString(Data.boyPerName[encryptionBase]);
                     break;
 
                 case "Girl's Name":
-                    encryptionBase = R.Next(Data.girlPerName.Length);
+                    encryptionBase = random.Next(Data.girlPerName.Length);
                     textBox1.Text += Convert.ToString(Data.girlPerName[encryptionBase]);
                     break;
             }
@@ -910,13 +901,6 @@ namespace UnHope
             }
             textBox1.Text = s.Replace("\a", "\r\n");
             toolStripComboBox1_TextChanged(sender, e);
-        }
-
-        private void removeDuplicateToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            textBox1.Lines = textBox1.Lines.Select(x => x).Distinct().ToArray();
-            textBox1.SelectionStart = textBox1.TextLength;
-            textBox1.ScrollToCaret(); 
         }
 
         private void toolStripComboBox1_TextChanged(object sender, EventArgs e)

@@ -49,11 +49,12 @@
             this.getCharacterRangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.addEachLineAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.orderByToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ascendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.descendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reverseLinesOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reverseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
+            this.distinctToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button1_1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button0 = new System.Windows.Forms.Button();
@@ -106,7 +107,6 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.removeDuplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -155,7 +155,7 @@
             this.getCharacterRangeToolStripMenuItem,
             this.toolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(259, 330);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(259, 308);
             // 
             // undoToolStripMenuItem
             // 
@@ -261,10 +261,10 @@
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addEachLineAToolStripMenuItem,
-            this.orderByToolStripMenuItem,
-            this.reverseLinesOrderToolStripMenuItem,
+            this.sortToolStripMenuItem,
+            this.reverseToolStripMenuItem,
             this.toolStripComboBox1,
-            this.removeDuplicateToolStripMenuItem});
+            this.distinctToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(258, 22);
             this.toolStripMenuItem1.Text = "Special Ops";
@@ -272,18 +272,18 @@
             // addEachLineAToolStripMenuItem
             // 
             this.addEachLineAToolStripMenuItem.Name = "addEachLineAToolStripMenuItem";
-            this.addEachLineAToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.addEachLineAToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.addEachLineAToolStripMenuItem.Text = "Add Each Line a ...";
             this.addEachLineAToolStripMenuItem.Click += new System.EventHandler(this.addEachLineAToolStripMenuItem_Click);
             // 
-            // orderByToolStripMenuItem
+            // sortToolStripMenuItem
             // 
-            this.orderByToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ascendingToolStripMenuItem,
             this.descendingToolStripMenuItem});
-            this.orderByToolStripMenuItem.Name = "orderByToolStripMenuItem";
-            this.orderByToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
-            this.orderByToolStripMenuItem.Text = "Order By Lines ...";
+            this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
+            this.sortToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.sortToolStripMenuItem.Text = "Sort";
             // 
             // ascendingToolStripMenuItem
             // 
@@ -299,12 +299,12 @@
             this.descendingToolStripMenuItem.Text = "Descending";
             this.descendingToolStripMenuItem.Click += new System.EventHandler(this.descendingToolStripMenuItem_Click);
             // 
-            // reverseLinesOrderToolStripMenuItem
+            // reverseToolStripMenuItem
             // 
-            this.reverseLinesOrderToolStripMenuItem.Name = "reverseLinesOrderToolStripMenuItem";
-            this.reverseLinesOrderToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
-            this.reverseLinesOrderToolStripMenuItem.Text = "Reverse Lines Order";
-            this.reverseLinesOrderToolStripMenuItem.Click += new System.EventHandler(this.reverseLinesOrderToolStripMenuItem_Click);
+            this.reverseToolStripMenuItem.Name = "reverseToolStripMenuItem";
+            this.reverseToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.reverseToolStripMenuItem.Text = "Reverse";
+            this.reverseToolStripMenuItem.Click += new System.EventHandler(this.reverseToolStripMenuItem_Click);
             // 
             // toolStripComboBox1
             // 
@@ -329,6 +329,13 @@
             this.toolStripComboBox1.Text = "Choose Filter";
             this.toolStripComboBox1.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBox1_SelectedIndexChanged);
             this.toolStripComboBox1.TextChanged += new System.EventHandler(this.toolStripComboBox1_TextChanged);
+            // 
+            // distinctToolStripMenuItem
+            // 
+            this.distinctToolStripMenuItem.Name = "distinctToolStripMenuItem";
+            this.distinctToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.distinctToolStripMenuItem.Text = "Distinct";
+            this.distinctToolStripMenuItem.Click += new System.EventHandler(this.distinctToolStripMenuItem_Click);
             // 
             // button1_1
             // 
@@ -368,6 +375,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(82, 21);
             this.comboBox1.TabIndex = 5;
+            this.comboBox1.Text = "8";
             // 
             // button0
             // 
@@ -831,13 +839,6 @@
             this.openFileDialog1.ShowReadOnly = true;
             this.openFileDialog1.Title = "Don\'t worry, I won\'t peek!";
             // 
-            // removeDuplicateToolStripMenuItem
-            // 
-            this.removeDuplicateToolStripMenuItem.Name = "removeDuplicateToolStripMenuItem";
-            this.removeDuplicateToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
-            this.removeDuplicateToolStripMenuItem.Text = "Remove Duplicate";
-            this.removeDuplicateToolStripMenuItem.Click += new System.EventHandler(this.removeDuplicateToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -949,8 +950,8 @@
         private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem orderByToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem reverseLinesOrderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reverseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ascendingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem descendingToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
@@ -969,7 +970,7 @@
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.ToolStripMenuItem defaultFont;
         private System.Windows.Forms.ToolStripMenuItem changeFont;
-        private System.Windows.Forms.ToolStripMenuItem removeDuplicateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem distinctToolStripMenuItem;
     }
 }
 

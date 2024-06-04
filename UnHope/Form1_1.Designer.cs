@@ -31,7 +31,7 @@
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.button1 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.distinctCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // checkedListBox1
@@ -43,20 +43,22 @@
             this.checkedListBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.Items.AddRange(new object[] {
-            "Numbers",
-            "Lowercase Eng Char",
-            "Uppercase Eng Char",
-            "Symbols"});
+            "Lowercase Eng",
+            "Uppercase Eng",
+            "ASCII Number",
+            "Non-ASCII Number",
+            "ASCII Symbol",
+            "Non-ASCII Symbol"});
             this.checkedListBox1.Location = new System.Drawing.Point(0, 0);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(127, 60);
+            this.checkedListBox1.Size = new System.Drawing.Size(127, 90);
             this.checkedListBox1.TabIndex = 0;
             this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
             // 
             // button1
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Location = new System.Drawing.Point(31, 80);
+            this.button1.Location = new System.Drawing.Point(31, 112);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(64, 21);
             this.button1.TabIndex = 3;
@@ -69,33 +71,33 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(1, 80);
+            this.checkBox1.Location = new System.Drawing.Point(1, 112);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(15, 14);
             this.checkBox1.TabIndex = 2;
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.Click += new System.EventHandler(this.checkBox1_Clicked);
             // 
-            // checkBox2
+            // distinctCheckBox
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(1, 63);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(113, 17);
-            this.checkBox2.TabIndex = 1;
-            this.checkBox2.Text = "No Duplicate Char";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.distinctCheckBox.AutoSize = true;
+            this.distinctCheckBox.Location = new System.Drawing.Point(1, 95);
+            this.distinctCheckBox.Name = "distinctCheckBox";
+            this.distinctCheckBox.Size = new System.Drawing.Size(110, 17);
+            this.distinctCheckBox.TabIndex = 1;
+            this.distinctCheckBox.Text = "Distinct Password";
+            this.distinctCheckBox.UseVisualStyleBackColor = true;
             // 
             // Form1_1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(127, 105);
+            this.ClientSize = new System.Drawing.Size(127, 137);
             this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.distinctCheckBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -110,7 +112,7 @@
         #endregion
         private System.Windows.Forms.Button button1;
         public System.Windows.Forms.CheckedListBox checkedListBox1;
-        public System.Windows.Forms.CheckBox checkBox2;
+        public System.Windows.Forms.CheckBox distinctCheckBox;
         public System.Windows.Forms.CheckBox checkBox1;
     }
 }

@@ -28,7 +28,7 @@ namespace UnHope
         {
             comboBox2.Text = FormRightToLeft ? "Boy's Name" : "First Name";
             bool caseInsensitive = false;
-            int a = 0, n = 0;
+            int n = 0;
             CultureInfo ci = new CultureInfo("");
             List<string> l = new List<string>();
 
