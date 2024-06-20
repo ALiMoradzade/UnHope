@@ -16,9 +16,14 @@ namespace UnHope
         {
             InitializeComponent();
         }
-        private void button1_Click(object sender, EventArgs e)
+
+        Random random = new Random();
+
+        private void button1_Click_1(object sender, EventArgs e)
         {
-            Close();
+            textBox1.Text+=random.Next((int)numericUpDown1.Value, (int)numericUpDown2.Value + 1)+"\r\n";
+            textBox1.SelectionStart = textBox1.TextLength;
+            textBox1.ScrollToCaret();
         }
     }
 }

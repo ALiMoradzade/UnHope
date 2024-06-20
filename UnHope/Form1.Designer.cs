@@ -48,13 +48,14 @@
             this.clipboardWatchDog = new System.Windows.Forms.ToolStripMenuItem();
             this.getCharacterRangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.addEachLineAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ascendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.descendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reverseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.distinctToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.addEachLineAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.button1_1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button0 = new System.Windows.Forms.Button();
@@ -260,21 +261,15 @@
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addEachLineAToolStripMenuItem,
             this.sortToolStripMenuItem,
             this.reverseToolStripMenuItem,
-            this.toolStripComboBox1,
-            this.distinctToolStripMenuItem});
+            this.distinctToolStripMenuItem,
+            this.toolStripSeparator5,
+            this.addEachLineAToolStripMenuItem,
+            this.toolStripComboBox1});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(258, 22);
             this.toolStripMenuItem1.Text = "Special Ops";
-            // 
-            // addEachLineAToolStripMenuItem
-            // 
-            this.addEachLineAToolStripMenuItem.Name = "addEachLineAToolStripMenuItem";
-            this.addEachLineAToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.addEachLineAToolStripMenuItem.Text = "Add Each Line a ...";
-            this.addEachLineAToolStripMenuItem.Click += new System.EventHandler(this.addEachLineAToolStripMenuItem_Click);
             // 
             // sortToolStripMenuItem
             // 
@@ -306,6 +301,25 @@
             this.reverseToolStripMenuItem.Text = "Reverse";
             this.reverseToolStripMenuItem.Click += new System.EventHandler(this.reverseToolStripMenuItem_Click);
             // 
+            // distinctToolStripMenuItem
+            // 
+            this.distinctToolStripMenuItem.Name = "distinctToolStripMenuItem";
+            this.distinctToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.distinctToolStripMenuItem.Text = "Distinct";
+            this.distinctToolStripMenuItem.Click += new System.EventHandler(this.distinctToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(187, 6);
+            // 
+            // addEachLineAToolStripMenuItem
+            // 
+            this.addEachLineAToolStripMenuItem.Name = "addEachLineAToolStripMenuItem";
+            this.addEachLineAToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.addEachLineAToolStripMenuItem.Text = "Add Each Line a ...";
+            this.addEachLineAToolStripMenuItem.Click += new System.EventHandler(this.addEachLineAToolStripMenuItem_Click);
+            // 
             // toolStripComboBox1
             // 
             this.toolStripComboBox1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
@@ -330,13 +344,6 @@
             this.toolStripComboBox1.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBox1_SelectedIndexChanged);
             this.toolStripComboBox1.TextChanged += new System.EventHandler(this.toolStripComboBox1_TextChanged);
             // 
-            // distinctToolStripMenuItem
-            // 
-            this.distinctToolStripMenuItem.Name = "distinctToolStripMenuItem";
-            this.distinctToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.distinctToolStripMenuItem.Text = "Distinct";
-            this.distinctToolStripMenuItem.Click += new System.EventHandler(this.distinctToolStripMenuItem_Click);
-            // 
             // button1_1
             // 
             this.button1_1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -344,7 +351,7 @@
             this.button1_1.Name = "button1_1";
             this.button1_1.Size = new System.Drawing.Size(74, 23);
             this.button1_1.TabIndex = 3;
-            this.button1_1.Text = "Automatic";
+            this.button1_1.Text = "Password";
             this.button1_1.UseVisualStyleBackColor = true;
             this.button1_1.Click += new System.EventHandler(this.button1_1_Click);
             // 
@@ -395,7 +402,7 @@
             this.button1_2.Name = "button1_2";
             this.button1_2.Size = new System.Drawing.Size(74, 23);
             this.button1_2.TabIndex = 2;
-            this.button1_2.Text = "Customize";
+            this.button1_2.Text = "Random";
             this.button1_2.UseVisualStyleBackColor = true;
             this.button1_2.Click += new System.EventHandler(this.button1_2_Click);
             // 
@@ -882,7 +889,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UnHope";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.contextMenuStrip1.ResumeLayout(false);
             this.contextMenuStrip2.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
@@ -948,7 +954,6 @@
         private System.Windows.Forms.ToolStripMenuItem addEachLineAToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reverseToolStripMenuItem;
@@ -971,6 +976,7 @@
         private System.Windows.Forms.ToolStripMenuItem defaultFont;
         private System.Windows.Forms.ToolStripMenuItem changeFont;
         private System.Windows.Forms.ToolStripMenuItem distinctToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
     }
 }
 

@@ -165,7 +165,7 @@ namespace MoradzadeHelperUtilityLibrary
                 }
                 else if (b.Contains(element)) s += morseCode[Array.IndexOf(b, element), 0];
             }
-            return s.Replace('•', '.').Replace('–', '-');
+            return s;
         }
         public static string PassWordGuessor(string passWord, bool doShortCut = false, string passWordBase = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@$#?~%+-_!=|&\\/*^'\"`.,:;<>[]{}()")
         {

@@ -11,6 +11,8 @@ using System.Web;
 using System.IO;
 using System.Diagnostics.Eventing.Reader;
 using System.Runtime.CompilerServices;
+using static System.Net.Mime.MediaTypeNames;
+using static MoradzadeHelperUtilityLibrary.Node;
 
 namespace UnHope
 {
@@ -36,17 +38,7 @@ namespace UnHope
             f5 = Frm5;
             f6 = Frm6;
             f7 = Frm7;
-        }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            for (int i = 0; i <= f1_1.checkedListBox1.Items.Count - 1; i++)
-            {
-                if (i == 3 || i == 5) continue;
-                f1_1.checkedListBox1.SetItemChecked(i, true);
-            }
-
-            
             openFileDialog1.Filter = "Text Files|*.txt;*.bat;*.cs;*.cpp;*.sql;*.jav;*.py;*.html;*.css;*.js";
 
             saveFileDialog1.Filter = "Text File|*.txt" +
@@ -61,6 +53,30 @@ namespace UnHope
                                      "|JS File|*.js";
 
             fontDialog1.Font = textBox1DefaultFont = textBox1.Font;
+
+            #region PasswordCatagoryTree
+            passwordCatTree.Root.AddChildren("Letter", "Digit", "Symbol");
+            
+            passwordCatTree.Root.Children["Letter"].AddChildren("ASCII Lowercase", "ASCII Uppercase", "Non-ASCII Lowercase", "Non-ASCII Uppercase");
+            passwordCatTree.Root.Children["Digit"].AddChildren("ASCII", "Non-ASCII");
+            passwordCatTree.Root.Children["Symbol"].AddChildren("ASCII", "Non-ASCII");
+
+            passwordCatTree.Root.Children["Letter"].Children["ASCII Lowercase"].AddChild("abcdefghijklmnopqrstuvwxyz");
+            passwordCatTree.Root.Children["Letter"].Children["ASCII Uppercase"].AddChild("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+            passwordCatTree.Root.Children["Letter"].Children["Non-ASCII Lowercase"].AddChild("§àáâãäåæçèéêëìíîïñòóôõöøùúûüýþßāăąćčďđēĕėęěğģīįiķĺļľłńņňőœŕřśşšţťūůűųźżžəț");
+            passwordCatTree.Root.Children["Letter"].Children["Non-ASCII Uppercase"].AddChild("§ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÑÒÓÔÕÖØÙÚÛÜÝÞßĀĂĄĆČĎĐĒĔĖĘĚĞĢĪĮİĶĹĻĽŁŃŅŇŐŒŔŘŚŞŠŢŤŪŮŰŲŹŻŽƏȚ");
+            passwordCatTree.Root.Children["Digit"].Children["ASCII"].AddChild("0123456789");
+            passwordCatTree.Root.Children["Digit"].Children["Non-ASCII"].AddChild("۰۱۲۳۴۵۶۷۸۹٠١٢٣٤٥٦٧٨٩");
+            passwordCatTree.Root.Children["Symbol"].Children["ASCII"].AddChild("!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~");
+            passwordCatTree.Root.Children["Symbol"].Children["Non-ASCII"].AddChild("¡£¤¥°¿÷٪•₩€■□▪◇○●☆♡♤♧《》");
+            #endregion
+
+            int[] filter = { 0, 1, 4, 6 };
+
+            foreach (var i in filter)
+            {
+                f1_1.checkedListBox1.SetItemChecked(i, true);
+            }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -81,11 +97,26 @@ namespace UnHope
             }
         }
 
+        private void InsertTextIntoTextBox1Conditions(string text)
+        {
+            if (checkBox1.Checked) textBox1.Clear();
+            else if (!(string.IsNullOrEmpty(textBox1.Text) || string.IsNullOrEmpty(textBox1.Lines.Last())))
+            {
+                textBox1.Text += "\r\n";
+            }
+
+            textBox1.Text += text;
+            GoEndOfTextBox(textBox1);
+        }
+
+        private void GoEndOfTextBox(TextBox textBox)
+        {
+            textBox.SelectionStart = textBox.TextLength;
+            textBox.ScrollToCaret();
+        }
+
         #region Data
-        public readonly string[,] passwordCharList = { { "abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZ" },
-                                                       { "0123456789", "۰۱۲۳۴۵۶۷۸۹٠١٢٣٤٥٦٧٨٩" },
-                                                       { "!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~", "¡£¤¥°¿÷٪•₩€■□▪◇○●☆♡♤♧《》" }
-                                                     };
+        
         int encryptionBase = 10, m;
         #endregion
 
@@ -405,8 +436,7 @@ namespace UnHope
             Form1_6 f1_6 = new Form1_6();
             f1_6.ShowDialog();
             textBox1.Lines = textBox1.Lines.Select(x => x + f1_6.textBox1.Text).ToArray();
-            textBox1.SelectionStart = textBox1.TextLength;
-            textBox1.ScrollToCaret();
+            GoEndOfTextBox(textBox1);
         }
 
         #region Sort
@@ -414,16 +444,14 @@ namespace UnHope
         {
             if (textBox1.SelectionLength > 0) textBox1.SelectedText = string.Concat(textBox1.SelectedText.OrderBy(x => x));
             else textBox1.Lines = textBox1.Lines.OrderBy(x => x).ToArray();
-            textBox1.SelectionStart = textBox1.TextLength;
-            textBox1.ScrollToCaret();
+            GoEndOfTextBox(textBox1);
         }
 
         private void descendingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (textBox1.SelectionLength > 0) textBox1.SelectedText = string.Concat(textBox1.SelectedText.OrderByDescending(x => x));
             else textBox1.Lines = textBox1.Lines.OrderByDescending(x => x).ToArray();
-            textBox1.SelectionStart = textBox1.TextLength;
-            textBox1.ScrollToCaret();
+            GoEndOfTextBox(textBox1);
         }
         #endregion
 
@@ -432,8 +460,7 @@ namespace UnHope
         {
             if (textBox1.SelectionLength > 0) textBox1.SelectedText = string.Concat(textBox1.SelectedText.Reverse());
             else textBox1.Lines = textBox1.Lines.Reverse().ToArray();
-            textBox1.SelectionStart = textBox1.TextLength;
-            textBox1.ScrollToCaret();
+            GoEndOfTextBox(textBox1);
         }
         #endregion
 
@@ -442,8 +469,7 @@ namespace UnHope
         {
             if (textBox1.SelectionLength > 0) textBox1.SelectedText = string.Concat(textBox1.SelectedText.Distinct());
             else textBox1.Lines = textBox1.Lines.Distinct().ToArray();
-            textBox1.SelectionStart = textBox1.TextLength;
-            textBox1.ScrollToCaret();
+            GoEndOfTextBox(textBox1);
         }
         #endregion
 
@@ -465,8 +491,7 @@ namespace UnHope
                 if (!string.IsNullOrEmpty(clipboardText))
                 {
                     textBox1.Text += clipboardText + "\r\n";
-                    textBox1.SelectionStart = textBox1.TextLength;
-                    textBox1.ScrollToCaret();
+                    GoEndOfTextBox(textBox1);
                     Clipboard.Clear();
                 }
             }
@@ -487,11 +512,9 @@ namespace UnHope
             comboBox2.SelectedItem = null;
             checkBox1.Checked = false;
 
-            f1_2.textBox1.Clear();
-            f1_2.textBox2.Clear();
-
             for (int i = 0; i < f1_1.checkedListBox1.Items.Count; i++)
             {
+                if (i == 3 || i == 5) continue;
                 f1_1.checkedListBox1.SetItemCheckState(i, CheckState.Checked);
             }
             f1_1.checkBox1.Checked = true;
@@ -507,82 +530,75 @@ namespace UnHope
         }
         #endregion
 
-        #region Automatic Edit
-        private void button1_1_1_Click(object sender, EventArgs e)
-        {
-            f1_1.ShowDialog();
-        }
-        #endregion
-
-        #region Automatic
+        #region Password Generator
+        Tree passwordCatTree = new Tree(new Node("S"));
+        
         private void button1_1_Click(object sender, EventArgs e)
         {
-            if (checkBox1.Checked) textBox1.Clear();
             if (comboBox1.Text == "") comboBox1.Text = "8";
-
-            int passwordCount = int.Parse(comboBox1.Text);
-
-            if (f1_1.distinctCheckBox.Checked && passwordCount > 140)
-            {
-                MessageBox.Show("Sorry, the chosen length is more than we expected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (f1_1.checkedListBox1.CheckedItems.Count == 0)
+           
+            if (f1_1.checkedListBox1.CheckedItems.Count == 0)
             {
                 MessageBox.Show("Sorry, you didn't checked any of checkboxes!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 f1_1.ShowDialog();
             }
             else
             {
-                Random random = new Random();
-                string password = "";
-                int generatedNum, previousNum = -1;
+                Node[] selectedLeaves = passwordCatTree.Leaves.Where((value, index) => f1_1.checkedListBox1.GetItemChecked(index)).ToArray();
 
-                while (password.Length < passwordCount)
+                int charCount = int.Parse(comboBox1.Text);
+                int maxCharCount = string.Concat(selectedLeaves.Select(leaf => leaf.Key)).Length;
+
+                if (f1_1.distinctCheckBox.Checked && charCount > maxCharCount)
                 {
-                    generatedNum = random.Next(f1_1.checkedListBox1.Items.Count);
-                    if (f1_1.checkedListBox1.GetItemChecked(generatedNum) && (previousNum != generatedNum / 2 || f1_1.checkedListBox1.CheckedIndices.Cast<int>().GroupBy(x => x / 2).Count() < 2)) 
-                    {
-                        int catagoryNumber = generatedNum / 2;
+                    MessageBox.Show($"Sorry, you can't choose length more than {maxCharCount}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
-                        string samplePass = passwordCharList[catagoryNumber, generatedNum % 2];
-                        char passsCharGen = samplePass[random.Next(samplePass.Length)];
+                Random random = new Random();
+                Node randomLeaf;
+                List<Node> previousLeaves = new List<Node> { new Node("") };
+
+                int randomLeafIndex;
+                string newPassword = "";
+                f1_1.repeatStepsCount.Maximum = selectedLeaves.GroupBy(leaf => leaf.GetParentAt(1)).Count() - 1;
+
+                while (newPassword.Length < charCount)
+                {
+                    randomLeafIndex = random.Next(selectedLeaves.Length);
+                    randomLeaf = selectedLeaves[randomLeafIndex];
+                    
+                    if (previousLeaves.Count > f1_1.repeatStepsCount.Value) previousLeaves.RemoveAt(0);
+
+                    if (!previousLeaves.Any(leaf => leaf.SameAncestorLevel(randomLeaf, 1)))
+                    {
+                        string leafValue = randomLeaf.ToString();
+                        char newChar = leafValue[random.Next(leafValue.Length)];
                         
-                        if (!(f1_1.distinctCheckBox.Checked && password.Contains(passsCharGen)))
+                        if (!(f1_1.distinctCheckBox.Checked && newPassword.Contains(newChar)))
                         {
-                            password += passsCharGen;
-                            previousNum = catagoryNumber;
+                            newPassword += newChar;
+                            previousLeaves.Add(randomLeaf);
                         }
                     }
                 }
-                encryptionBase = 0;
-
-                if (!(string.IsNullOrEmpty(textBox1.Text) || string.IsNullOrEmpty(textBox1.Lines.Last())))
-                {
-                    textBox1.Text += "\r\n";
-                }
-
-                textBox1.Text += password;
+                
+                InsertTextIntoTextBox1Conditions(newPassword);
             }
+        }
+
+        private void button1_1_1_Click(object sender, EventArgs e)
+        {
+            f1_1.ShowDialog();
         }
         #endregion
 
-        #region Customize
+        #region Random
         private void button1_2_Click(object sender, EventArgs e)
         {
-            if (checkBox1.Checked) textBox1.Clear();
+            Random random = new Random();
+            f1_2.ShowDialog();
 
-            if (f1_2.textBox1.Text == "" && f1_2.textBox2.Text == "" ) f1_2.ShowDialog();
-            if (comboBox1.Text == "") comboBox1.Text = Convert.ToString(Math.Ceiling((f1_2.textBox1.TextLength + f1_2.textBox2.TextLength) / 3.0));
-            if (f1_2.textBox1.Text != "" || f1_2.textBox2.Text != "")
-            {
-
-                for (int i = 1; i <= Convert.ToInt32(comboBox1.Text); i++)
-                {
-                    
-                }
-                if (!checkBox1.Checked) textBox1.Text += "\r\n";
-            }
-            else MessageBox.Show("Sorry, you didn't enter your information!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         #endregion
 
@@ -597,11 +613,10 @@ namespace UnHope
         private void button1_3_Click(object sender, EventArgs e)
         {
             Random random = new Random();
-            if (checkBox1.Checked) textBox1.Clear();
-            encryptionBase = random.Next(Data.engFirstName.Length);
-            m = random.Next(Data.engLastName.Length);
-            textBox1.Text += Convert.ToString(Data.engFirstName[encryptionBase]) + " " + Convert.ToString(Data.engLastName[m]);
-            if (!checkBox1.Checked) textBox1.Text += "\r\n";
+            int firstNameLength = Data.engFirstName.Length, lastNameLength = Data.engLastName.Length;
+
+            string fullName = Data.engFirstName[random.Next(firstNameLength)] + " " + Data.engLastName[random.Next(lastNameLength)];
+            InsertTextIntoTextBox1Conditions(fullName);
         }
         #endregion
 
@@ -615,24 +630,22 @@ namespace UnHope
         #region Persian Name
         private void button1_4_Click(object sender, EventArgs e)
         {
-            if (checkBox1.Checked) textBox1.Clear();
-
             if (comboBox2.Text == "") comboBox2.Text = "Boy's Name";
-
+           
             Random random = new Random();
-            switch (comboBox2.Text)
+            string name = "";
+            if (comboBox2.SelectedItem.ToString() == "Boy's Name")
             {
-                case "Boy's Name":
-                    encryptionBase = random.Next(Data.boyPerName.Length);
-                    textBox1.Text += Convert.ToString(Data.boyPerName[encryptionBase]);
-                    break;
-
-                case "Girl's Name":
-                    encryptionBase = random.Next(Data.girlPerName.Length);
-                    textBox1.Text += Convert.ToString(Data.girlPerName[encryptionBase]);
-                    break;
+                int n = Data.boyPerName.Length;
+                name = Data.boyPerName[random.Next(n)];
             }
-            if (!checkBox1.Checked) textBox1.Text += "\r\n";
+            else if (comboBox2.SelectedItem.ToString() == "Girl's Name")
+            {
+                int n = Data.girlPerName.Length;
+                name = Data.girlPerName[random.Next(n)];
+            }
+            
+            InsertTextIntoTextBox1Conditions(name);
         }
         #endregion
 
@@ -727,8 +740,7 @@ namespace UnHope
                         else if (r == DialogResult.No) textBox1.Text += await streamReader.ReadToEndAsync();
                     }
                 }
-                textBox1.SelectionStart = textBox1.TextLength;
-                textBox1.ScrollToCaret();
+                GoEndOfTextBox(textBox1);
 
                 if (!openFileDialog1.ReadOnlyChecked) fileName.Text = "File Name: " + openFileDialog1.SafeFileName;
             }
