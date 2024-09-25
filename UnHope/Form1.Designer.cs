@@ -48,16 +48,21 @@
             this.clipboardWatchDog = new System.Windows.Forms.ToolStripMenuItem();
             this.getCharacterRangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ascendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.descendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.byToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lexicoAscByLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lexicoDescByLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logicalAscByLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logicalDescByLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.byTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lexicoAscByTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lexicoDescByTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reverseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.distinctToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.addEachLineAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.button1_1 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button0 = new System.Windows.Forms.Button();
             this.button1_2 = new System.Windows.Forms.Button();
             this.button1_3 = new System.Windows.Forms.Button();
@@ -108,9 +113,11 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
@@ -156,7 +163,7 @@
             this.getCharacterRangeToolStripMenuItem,
             this.toolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(259, 308);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(259, 330);
             // 
             // undoToolStripMenuItem
             // 
@@ -261,7 +268,7 @@
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sortToolStripMenuItem,
+            this.toolStripMenuItem2,
             this.reverseToolStripMenuItem,
             this.distinctToolStripMenuItem,
             this.toolStripSeparator5,
@@ -271,28 +278,76 @@
             this.toolStripMenuItem1.Size = new System.Drawing.Size(258, 22);
             this.toolStripMenuItem1.Text = "Special Ops";
             // 
-            // sortToolStripMenuItem
+            // toolStripMenuItem2
             // 
-            this.sortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ascendingToolStripMenuItem,
-            this.descendingToolStripMenuItem});
-            this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
-            this.sortToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.sortToolStripMenuItem.Text = "Sort";
+            this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.byToolStripMenuItem,
+            this.byTextToolStripMenuItem});
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(190, 22);
+            this.toolStripMenuItem2.Text = "Sort | Order";
             // 
-            // ascendingToolStripMenuItem
+            // byToolStripMenuItem
             // 
-            this.ascendingToolStripMenuItem.Name = "ascendingToolStripMenuItem";
-            this.ascendingToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.ascendingToolStripMenuItem.Text = "Ascending";
-            this.ascendingToolStripMenuItem.Click += new System.EventHandler(this.ascendingToolStripMenuItem_Click);
+            this.byToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lexicoAscByLineToolStripMenuItem,
+            this.lexicoDescByLineToolStripMenuItem,
+            this.logicalAscByLineToolStripMenuItem,
+            this.logicalDescByLineToolStripMenuItem});
+            this.byToolStripMenuItem.Name = "byToolStripMenuItem";
+            this.byToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.byToolStripMenuItem.Text = "By Line";
             // 
-            // descendingToolStripMenuItem
+            // lexicoAscByLineToolStripMenuItem
             // 
-            this.descendingToolStripMenuItem.Name = "descendingToolStripMenuItem";
-            this.descendingToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.descendingToolStripMenuItem.Text = "Descending";
-            this.descendingToolStripMenuItem.Click += new System.EventHandler(this.descendingToolStripMenuItem_Click);
+            this.lexicoAscByLineToolStripMenuItem.Name = "lexicoAscByLineToolStripMenuItem";
+            this.lexicoAscByLineToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.lexicoAscByLineToolStripMenuItem.Text = "Lexicographical Ascending";
+            this.lexicoAscByLineToolStripMenuItem.Click += new System.EventHandler(this.lexicoAscByLineToolStripMenuItem_Click);
+            // 
+            // lexicoDescByLineToolStripMenuItem
+            // 
+            this.lexicoDescByLineToolStripMenuItem.Name = "lexicoDescByLineToolStripMenuItem";
+            this.lexicoDescByLineToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.lexicoDescByLineToolStripMenuItem.Text = "Lexicographical Descending";
+            this.lexicoDescByLineToolStripMenuItem.Click += new System.EventHandler(this.lexicoDescByLineToolStripMenuItem_Click);
+            // 
+            // logicalAscByLineToolStripMenuItem
+            // 
+            this.logicalAscByLineToolStripMenuItem.Name = "logicalAscByLineToolStripMenuItem";
+            this.logicalAscByLineToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.logicalAscByLineToolStripMenuItem.Text = "Logical Ascending";
+            this.logicalAscByLineToolStripMenuItem.Click += new System.EventHandler(this.logicalAscByLineToolStripMenuItem_Click);
+            // 
+            // logicalDescByLineToolStripMenuItem
+            // 
+            this.logicalDescByLineToolStripMenuItem.Name = "logicalDescByLineToolStripMenuItem";
+            this.logicalDescByLineToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.logicalDescByLineToolStripMenuItem.Text = "Logical Descending";
+            this.logicalDescByLineToolStripMenuItem.Click += new System.EventHandler(this.logicalDescByLineToolStripMenuItem_Click);
+            // 
+            // byTextToolStripMenuItem
+            // 
+            this.byTextToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lexicoAscByTextToolStripMenuItem,
+            this.lexicoDescByTextToolStripMenuItem});
+            this.byTextToolStripMenuItem.Name = "byTextToolStripMenuItem";
+            this.byTextToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.byTextToolStripMenuItem.Text = "By Text";
+            // 
+            // lexicoAscByTextToolStripMenuItem
+            // 
+            this.lexicoAscByTextToolStripMenuItem.Name = "lexicoAscByTextToolStripMenuItem";
+            this.lexicoAscByTextToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.lexicoAscByTextToolStripMenuItem.Text = "Ascending";
+            this.lexicoAscByTextToolStripMenuItem.Click += new System.EventHandler(this.lexicoAscByTextToolStripMenuItem_Click);
+            // 
+            // lexicoDescByTextToolStripMenuItem
+            // 
+            this.lexicoDescByTextToolStripMenuItem.Name = "lexicoDescByTextToolStripMenuItem";
+            this.lexicoDescByTextToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.lexicoDescByTextToolStripMenuItem.Text = "Descending";
+            this.lexicoDescByTextToolStripMenuItem.Click += new System.EventHandler(this.lexicoDescByTextToolStripMenuItem_Click);
             // 
             // reverseToolStripMenuItem
             // 
@@ -354,35 +409,6 @@
             this.button1_1.Text = "Password";
             this.button1_1.UseVisualStyleBackColor = true;
             this.button1_1.Click += new System.EventHandler(this.button1_1_Click);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.BackColor = System.Drawing.Color.White;
-            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "8",
-            "16",
-            "32",
-            "50",
-            "100",
-            "200",
-            "300",
-            "400",
-            "500",
-            "1000",
-            "10000",
-            "100000",
-            "1000000",
-            "10000000",
-            "100000000",
-            "999999999"});
-            this.comboBox1.Location = new System.Drawing.Point(245, 274);
-            this.comboBox1.MaxLength = 9;
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(82, 21);
-            this.comboBox1.TabIndex = 5;
-            this.comboBox1.Text = "8";
             // 
             // button0
             // 
@@ -791,7 +817,7 @@
             // button7
             // 
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button7.Location = new System.Drawing.Point(412, 273);
+            this.button7.Location = new System.Drawing.Point(398, 273);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(40, 23);
             this.button7.TabIndex = 31;
@@ -802,7 +828,7 @@
             // button8
             // 
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button8.Location = new System.Drawing.Point(333, 273);
+            this.button8.Location = new System.Drawing.Point(319, 273);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(73, 23);
             this.button8.TabIndex = 32;
@@ -846,12 +872,31 @@
             this.openFileDialog1.ShowReadOnly = true;
             this.openFileDialog1.Title = "Don\'t worry, I won\'t peek!";
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(245, 275);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            150000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(68, 20);
+            this.numericUpDown1.TabIndex = 35;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            18,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Validated += new System.EventHandler(this.numericUpDown1_Validated);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(473, 458);
+            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
@@ -875,7 +920,6 @@
             this.Controls.Add(this.button1_4);
             this.Controls.Add(this.button1_2);
             this.Controls.Add(this.button0);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button1_1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label5);
@@ -893,6 +937,7 @@
             this.contextMenuStrip2.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -900,7 +945,6 @@
 
         #endregion
         private System.Windows.Forms.Button button1_1;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.Button button1_2;
         private System.Windows.Forms.Button button1_3;
@@ -955,10 +999,7 @@
         private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reverseToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ascendingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem descendingToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
@@ -977,6 +1018,16 @@
         private System.Windows.Forms.ToolStripMenuItem changeFont;
         private System.Windows.Forms.ToolStripMenuItem distinctToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem byToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lexicoAscByLineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lexicoDescByLineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem byTextToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lexicoAscByTextToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lexicoDescByTextToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem logicalAscByLineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem logicalDescByLineToolStripMenuItem;
     }
 }
 

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace MoradzadeHelperUtilityLibrary
 {
-    public static class Extention
+    public static partial class Extention
     {
         public static string GenerateNumber(this Random r, uint length)
         {

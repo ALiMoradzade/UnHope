@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml.Linq;
 
 namespace MoradzadeHelperUtilityLibrary
@@ -26,7 +29,6 @@ namespace MoradzadeHelperUtilityLibrary
             string[] s = nodes.Select(x => $"{string.Concat(Enumerable.Repeat(seprator, x.level))}{x.Key}: {x.Value}").ToArray();
             return string.Join("\r\n", s);
         }
-
         List<Node> GetNodesByDFS(Node node)
         {
             List<Node> s = new List<Node> { node };
@@ -36,6 +38,17 @@ namespace MoradzadeHelperUtilityLibrary
             }
             return s;
         }
+
+        public List<Node> GetNodesAt(int level)
+        {
+            List<Node> nodes = new List<Node> { root };
+
+            for (int i = 1; i <= level; i++)
+            {
+                nodes = nodes.SelectMany(x => x.children).ToList();
+            }
+            return nodes;
+        }
     }
     public class Node
     {
@@ -44,7 +57,7 @@ namespace MoradzadeHelperUtilityLibrary
         internal int level;
         string path;
         Node parent;
-        List<Node> children = new List<Node>();
+        internal List<Node> children = new List<Node>();
 
         public Node(string name, object data = null)
         {
@@ -110,11 +123,12 @@ namespace MoradzadeHelperUtilityLibrary
             if (parent.level == level) return parent;
             return parent.GetParentAt(level);
         }
+
         public override string ToString()
         {
             return key;
         }
-
+       
         #region Children Collection
         public ChildrenCollection GetEnumerator()
         {
