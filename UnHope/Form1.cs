@@ -489,23 +489,29 @@ namespace UnHope
         #region Logical
         private void logicalAscByLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!textBox1.Lines.All(x => x.All(y => char.IsNumber(y))))
+            if (textBox1.Lines.All(x => !string.IsNullOrEmpty(x)) &&
+                textBox1.Lines.All(x => x.All(y => char.IsNumber(y))))
+            {
+                textBox1.Lines = textBox1.Lines.OrderBy(x => int.Parse(x)).ToArray();
+                ShowEndOfTextBox1();
+            }
+            else
             {
                 MessageBox.Show("All lines of the text be number only!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
             }
-            textBox1.Lines = textBox1.Lines.OrderBy(x => int.Parse(x)).ToArray();
-            ShowEndOfTextBox1();
         }
         private void logicalDescByLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!textBox1.Lines.All(x => x.All(y => char.IsNumber(y))))
+            if (textBox1.Lines.All(x => !string.IsNullOrEmpty(x)) &&
+                textBox1.Lines.All(x => x.All(y => char.IsNumber(y))))
+            {
+                textBox1.Lines = textBox1.Lines.OrderByDescending(x => int.Parse(x)).ToArray();
+                ShowEndOfTextBox1();
+            }
+            else
             {
                 MessageBox.Show("All lines of the text be number only!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
             }
-            textBox1.Lines = textBox1.Lines.OrderByDescending(x => int.Parse(x)).ToArray();
-            ShowEndOfTextBox1();
         }
         #endregion
 
